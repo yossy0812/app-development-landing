@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アプリ開発 | 株式会社AI START</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Noto+Serif+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B8941E;
+            --charcoal: #1a1a1a;
+            --light-charcoal: #2a2a2a;
+            --cream: #FAF8F3;
+            --silver: #C0C0C0;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Noto Serif JP', serif;
+            line-height: 1.8;
+            color: var(--charcoal);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            color: var(--charcoal);
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: var(--white);
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            line-height: 2;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            border: 2px solid var(--gold);
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            font-weight: 300;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: var(--charcoal);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 150px 60px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: var(--charcoal);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        /* Strengths Section */
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .strength-card {
+            background: var(--cream);
+            padding: 60px;
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .strength-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.5s ease;
+        }
+
+        .strength-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .strength-card:hover::before {
+            width: 100%;
+        }
+
+        .strength-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.2);
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .strength-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .strength-card p {
+            color: #555;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .strength-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            filter: grayscale(20%);
+            transition: all 0.5s ease;
+        }
+
+        .strength-card:hover .strength-image {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        /* Systems Grid */
+        .systems-section {
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .systems-section .section-title {
+            color: var(--white);
+        }
+
+        .systems-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .system-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 50px 30px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .system-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            transition: height 0.5s ease;
+        }
+
+        .system-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .system-card:hover::before {
+            height: 100%;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .system-card:hover .icon {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .system-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .system-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .system-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            transition: opacity 0.4s ease;
+        }
+
+        .system-card:hover .system-image {
+            opacity: 1;
+        }
+
+        /* Process Section */
+        .process-timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 80px auto 0;
+        }
+
+        .process-line {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 120px;
+            height: 120px;
+            background: var(--cream);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .process-step:hover .step-number {
+            background: var(--gold);
+            color: var(--charcoal);
+            transform: scale(1.1);
+        }
+
+        .process-step h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .process-step p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .process-visual {
+            width: 100%;
+            max-width: 1000px;
+            height: 400px;
+            margin: 60px auto 0;
+            background: var(--cream);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        /* Target Clients */
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            max-width: 1200px;
+            margin: 80px auto 0;
+        }
+
+        .target-card {
+            background: var(--cream);
+            padding: 60px 40px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .target-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+            border-color: var(--gold);
+        }
+
+        .target-card .icon {
+            background: transparent;
+            border: 2px solid var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .target-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .target-card p {
+            color: #555;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .target-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            filter: brightness(0.95);
+            transition: all 0.5s ease;
+        }
+
+        .target-card:hover .target-image {
+            filter: brightness(1);
+            transform: scale(1.02);
+        }
+
+        /* Image Lazy Loading */
+        img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        img[loading="lazy"].loaded {
+            opacity: 1;
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(212, 175, 55, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 3rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Background Colors */
+        .bg-white {
+            background: var(--white);
+        }
+
+        .bg-cream {
+            background: var(--cream);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        }
+
+        .cta-section .section-title {
+            color: var(--white);
+            margin-bottom: 2rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 20px 60px;
+            background: var(--gold);
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            font-weight: 400;
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 20px 60px;
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            border: 2px solid var(--gold);
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            font-weight: 300;
+            transition: all 0.4s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 4rem;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+        }
+
+        /* Decorative Elements */
+        .decorative-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 40px auto;
+        }
+
+        /* Scroll Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .systems-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .strengths-grid,
+            .systems-grid,
+            .process-grid,
+            .target-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            section {
+                padding: 80px 30px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">AI START</div>
+            <ul class="nav-links">
+                <li><a href="#strengths">強み</a></li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#process">開発の流れ</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1920&h=1080&fit=crop"
+             alt="アプリ開発"
+             class="hero-image"
+             loading="eager">
+        <div class="hero-content">
+            <div class="hero-subtitle">PREMIUM DEVELOPMENT</div>
+            <h1>アプリ開発</h1>
+            <div class="decorative-line"></div>
+            <p class="hero-description">
+                アプリ開発の専門チームが貴社のビジョンを実現します<br>
+                企画段階からのパーソナライズされたコミュニケーションと、<br>
+                運用後の保守まで一気通貫でサポート
+            </p>
+            <a href="#contact" class="cta-button">ご相談はこちら</a>
+        </div>
+    </section>
+
+    <!-- Strengths Section -->
+    <section id="strengths" class="bg-white">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">01 / REASONS</div>
+                <h2 class="section-title">選ばれる理由</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="strengths-grid">
+                <div class="strength-card">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=400&fit=crop"
+                         alt="ワイヤーフレーム"
+                         class="strength-image"
+                         loading="lazy">
+                    <div class="strength-number">01</div>
+                    <h3>ワイヤーフレーム提供</h3>
+                    <p>見積もり段階から具体的なイメージを共有。プロジェクトの初期段階からお客様の理解と合意形成をスムーズに進めます。</p>
+                </div>
+                <div class="strength-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop"
+                         alt="直接コミュニケーション"
+                         class="strength-image"
+                         loading="lazy">
+                    <div class="strength-number">02</div>
+                    <h3>直接コミュニケーション</h3>
+                    <p>中間業者を介さず、開発担当者と直接やり取り。意思疎通がスムーズで、細かなニュアンスまで正確に伝わります。</p>
+                </div>
+                <div class="strength-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop"
+                         alt="一気通貫サポート"
+                         class="strength-image"
+                         loading="lazy">
+                    <div class="strength-number">03</div>
+                    <h3>一気通貫サポート</h3>
+                    <p>企画立案から運用後のメンテナンスまで、長期的にお客様のビジネスをサポート。開発後も安心してお任せいただけます。</p>
+                </div>
+                <div class="strength-card">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=400&fit=crop"
+                         alt="適正価格設定"
+                         class="strength-image"
+                         loading="lazy">
+                    <div class="strength-number">04</div>
+                    <h3>適正価格設定</h3>
+                    <p>お客様の予算に応じて、最適な開発プランをご提案。無駄なコストを削減し、必要な機能に集中します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Systems -->
+    <section id="services" class="systems-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">02 / WEB SYSTEMS</div>
+                <h2 class="section-title">Webシステム</h2>
+                <p class="section-subtitle">
+                    マッチングシステムから予約システム、e-ラーニングシステム、ポータルサイトまで、<br>
+                    様々なWebシステムの開発に対応します
+                </p>
+            </div>
+            <div class="systems-grid">
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=360&fit=crop"
+                         alt="マッチングシステム"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>マッチングシステム</h3>
+                    <p>求職者と企業、専門家とクライアントなど、ニーズに応じた最適なマッチングを実現</p>
+                </div>
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=600&h=360&fit=crop"
+                         alt="予約システム"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>予約システム</h3>
+                    <p>美容室、病院、レストランなど、様々な業種に対応した使いやすい予約管理システム</p>
+                </div>
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=600&h=360&fit=crop"
+                         alt="e-ラーニングシステム"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>e-ラーニングシステム</h3>
+                    <p>オンライン学習を効果的に進めるための機能が充実した教育プラットフォーム</p>
+                </div>
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&h=360&fit=crop"
+                         alt="ポータルサイト"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>ポータルサイト</h3>
+                    <p>情報発信と集客を両立する、企業や組織の顔となるWebサイト</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Systems -->
+    <section class="bg-cream">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">03 / BUSINESS SYSTEMS</div>
+                <h2 class="section-title">業務システム</h2>
+                <p class="section-subtitle">
+                    顧客管理、在庫管理、受注管理、予約管理など、<br>
+                    業務効率化を実現する各種システムを開発します
+                </p>
+            </div>
+            <div class="systems-grid">
+                <div class="system-card" style="background: white; color: var(--charcoal);">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=360&fit=crop"
+                         alt="顧客管理システム"
+                         class="system-image"
+                         style="opacity: 0.9;"
+                         loading="lazy">
+                    <h3 style="color: var(--charcoal);">顧客管理システム</h3>
+                    <p style="color: #666;">顧客情報を一元管理し、営業活動を効率化。顧客満足度向上に貢献します</p>
+                </div>
+                <div class="system-card" style="background: white; color: var(--charcoal);">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=360&fit=crop"
+                         alt="在庫管理システム"
+                         class="system-image"
+                         style="opacity: 0.9;"
+                         loading="lazy">
+                    <h3 style="color: var(--charcoal);">在庫管理システム</h3>
+                    <p style="color: #666;">リアルタイムで在庫状況を把握。適切な在庫量を維持し、コスト削減を実現</p>
+                </div>
+                <div class="system-card" style="background: white; color: var(--charcoal);">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=360&fit=crop"
+                         alt="受注管理システム"
+                         class="system-image"
+                         style="opacity: 0.9;"
+                         loading="lazy">
+                    <h3 style="color: var(--charcoal);">受注管理システム</h3>
+                    <p style="color: #666;">受注から出荷までの業務フローを一元管理。処理スピード向上とミス削減</p>
+                </div>
+                <div class="system-card" style="background: white; color: var(--charcoal);">
+                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=360&fit=crop"
+                         alt="予約管理システム"
+                         class="system-image"
+                         style="opacity: 0.9;"
+                         loading="lazy">
+                    <h3 style="color: var(--charcoal);">予約管理システム</h3>
+                    <p style="color: #666;">予約受付から顧客対応まで効率化。業務負担を軽減し、サービス品質を向上</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Apps -->
+    <section class="systems-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">04 / MOBILE APPS</div>
+                <h2 class="section-title">モバイルアプリケーション</h2>
+                <p class="section-subtitle">
+                    iOS/Androidネイティブアプリ、LINEアプリ、ハイブリッドアプリ、Webアプリケーションまで、<br>
+                    お客様のニーズに合わせた最適なソリューションをご提供します
+                </p>
+            </div>
+            <div class="systems-grid">
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=360&fit=crop"
+                         alt="iOS/Androidアプリ"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>iOS/Androidネイティブアプリ</h3>
+                    <p>各プラットフォームの特性を最大限活かした、高パフォーマンスなアプリ開発</p>
+                </div>
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=360&fit=crop"
+                         alt="LINEアプリ"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>LINEアプリ</h3>
+                    <p>LINE上で動作する、使い慣れたインターフェースで利用できるアプリ</p>
+                </div>
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=360&fit=crop"
+                         alt="ハイブリッドアプリ"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>ハイブリッドアプリ</h3>
+                    <p>iOS/Android両対応で、開発コストを抑えながら幅広いユーザーにリーチ</p>
+                </div>
+                <div class="system-card">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&h=360&fit=crop"
+                         alt="Webアプリケーション"
+                         class="system-image"
+                         loading="lazy">
+                    <h3>Webアプリケーション</h3>
+                    <p>ブラウザで動作し、インストール不要でどこからでもアクセス可能</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="bg-white">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">05 / PROCESS</div>
+                <h2 class="section-title">開発の流れ</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="process-timeline">
+                <div class="process-line"></div>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <h3>お問い合わせ</h3>
+                        <p>まずはお気軽にご相談ください。お客様のご要望をお聞かせください</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <h3>ヒアリング</h3>
+                        <p>詳しくお話をお聞きし、課題やご要望を整理。最適なソリューションを検討します</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <h3>ご提案・お見積もり</h3>
+                        <p>ワイヤーフレームとともに、具体的な提案と詳細な見積もりをご提示</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <h3>ご契約・開発</h3>
+                        <p>ご契約後、開発をスタート。定期的に進捗をご報告しながら進めます</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">05</div>
+                        <h3>納品・運用サポート</h3>
+                        <p>テスト完了後に納品。その後も継続的なサポートで安心してご利用いただけます</p>
+                    </div>
+                </div>
+            </div>
+            <div class="process-visual">
+                <img src="https://images.unsplash.com/photo-1542626991-cbc4e32524cc?w=1000&h=800&fit=crop"
+                     alt="開発フロー"
+                     loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Clients -->
+    <section class="bg-cream">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">06 / TARGET</div>
+                <h2 class="section-title">こんな方におすすめ</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="target-grid">
+                <div class="target-card">
+                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=440&fit=crop"
+                         alt="DX推進"
+                         class="target-image"
+                         loading="lazy">
+                    <h3>DXを推進したい企業</h3>
+                    <p>デジタル化を進めたいが、何から始めればよいかわからない企業様に最適なソリューションをご提案します</p>
+                </div>
+                <div class="target-card">
+                    <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&h=440&fit=crop"
+                         alt="技術サポート"
+                         class="target-image"
+                         loading="lazy">
+                    <h3>技術知識がない方</h3>
+                    <p>技術的な知識がなくても大丈夫。わかりやすく丁寧にご説明し、安心して開発を進められます</p>
+                </div>
+                <div class="target-card">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=440&fit=crop"
+                         alt="カスタム開発"
+                         class="target-image"
+                         loading="lazy">
+                    <h3>カスタムソリューションが必要な方</h3>
+                    <p>既製品では対応できない独自の業務フローやニーズに合わせたシステムを構築します</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="section-number">07 / CONTACT</div>
+            <h2 class="section-title">アプリ開発のご相談</h2>
+            <div class="decorative-line"></div>
+            <p>
+                お客様のビジネスビジョンをしっかりとお聞きし、<br>
+                最適なソリューションをご提案いたします。<br>
+                まずは無料相談からお気軽にお問い合わせください。
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary">無料相談を申し込む</a>
+                <a href="#" class="btn-secondary">開発事例資料をダウンロード</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 株式会社AI START. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Lazy loading images
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.01
+                });
+
+                lazyImages.forEach(img => {
+                    imageObserver.observe(img);
+                    // Fallback for images already in viewport
+                    if (img.complete) {
+                        img.classList.add('loaded');
+                    }
+                    img.addEventListener('load', function() {
+                        this.classList.add('loaded');
+                    });
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                lazyImages.forEach(img => {
+                    img.classList.add('loaded');
+                });
+            }
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Fade in animations on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.strength-card, .system-card, .process-step, .target-card').forEach(el => {
+                fadeObserver.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
