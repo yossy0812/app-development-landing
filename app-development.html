@@ -67,13 +67,17 @@
 
         .logo {
             font-size: 0;
-            width: 180px;
+            width: 200px;
             height: 50px;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTgwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8dGV4dCB4PSIwIiB5PSIzNSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iODAwIiBmb250LXNpemU9IjI4IiBmaWxsPSIjRkY2QjAwIj5BSSBTVEFSVDwvdGV4dD4KPC9zdmc+');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            display: flex;
+            align-items: center;
             position: relative;
+        }
+
+        .logo img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -287,6 +291,116 @@
             font-size: 0.85rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .strengths-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .logo {
+                width: 140px;
+                height: 40px;
+            }
+
+            .hero {
+                padding: 120px 20px 80px !important;
+            }
+
+            .hero h1 {
+                font-size: 2rem !important;
+            }
+
+            .hero-description {
+                font-size: 1rem !important;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
+
+            [style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            [style*="display: grid; gap: 50px"] {
+                gap: 30px !important;
+            }
+
+            [style*="display: flex; align-items: start; gap: 30px"] {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            [style*="padding: 50px"] {
+                padding: 30px !important;
+            }
+
+            [style*="padding: 100px 60px"] {
+                padding: 60px 20px !important;
+            }
+
+            [style*="font-size: 4rem"] {
+                font-size: 2rem !important;
+            }
+
+            [style*="font-size: 4.5rem"] {
+                font-size: 2.2rem !important;
+            }
+
+            [style*="display: grid; grid-template-columns: 1fr 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem !important;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            [style*="padding: 30px"] {
+                padding: 20px !important;
+            }
         }
 
         /* Before/After Section */
@@ -736,7 +850,9 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo">AI START</div>
+            <a href="#top" class="logo">
+                <img src="images/rogo.ai-start.png" alt="AI START">
+            </a>
             <ul class="nav-links">
                 <li><a href="#strengths">強み</a></li>
                 <li><a href="#services">サービス</a></li>
@@ -747,17 +863,15 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-content">
             <h1>
-                アプリ開発の専門チームが<br>
-                <span style="color: var(--primary);">貴社のビジョンを実現</span>します
+                その手作業、<br>
+                <span style="color: var(--primary);">テクノロジーで終わらせませんか。</span>
             </h1>
 
             <p class="hero-description">
-                エンジニア直接対応で、中間マージンゼロ・伝言ゲームゼロ。<br>
-                「何が必要か分からない」段階から、成果が出るまで全力サポート。<br>
-                お求めやすい価格で、本当に必要なシステムを作ります。
+                私たちは、貴社の『時間』を創り出す業務改善を提案します。
             </p>
 
             <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
@@ -769,21 +883,6 @@
                 </a>
             </div>
 
-            <!-- Stats -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; max-width: 900px; margin: 5rem auto 0; padding-top: 4rem; border-top: 1px solid rgba(255,255,255,0.2);">
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">40-60<span style="font-size: 2rem;">%</span></div>
-                    <div style="color: rgba(255,255,255,0.9); font-size: 1rem; font-weight: 500;">コスト削減</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">24<span style="font-size: 2rem;">h</span></div>
-                    <div style="color: rgba(255,255,255,0.9); font-size: 1rem; font-weight: 500;">以内に返信</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">100<span style="font-size: 2rem;">%</span></div>
-                    <div style="color: rgba(255,255,255,0.9); font-size: 1rem; font-weight: 500;">成果保証</div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -798,94 +897,10 @@
             </div>
 
             <div style="display: grid; gap: 50px; max-width: 1100px; margin: 0 auto;">
-                <!-- 課題1: 予算オーバー -->
+                <!-- 課題1: 企画の不安 -->
                 <div style="background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--primary);">
                     <div style="display: flex; align-items: start; gap: 30px;">
-                        <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--charcoal); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">01</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem;">他社の見積もりが予算の3倍...「システム化は諦めるしかない」</h3>
-                            <div style="background: var(--light-gray); padding: 25px; border-radius: 12px; margin-bottom: 1.5rem; border-left: 3px solid var(--primary);">
-                                <p style="font-size: 1.05rem; line-height: 2; color: var(--text-dark); font-style: italic;">
-                                    「予約システムの見積もりを3社に依頼したら、最安でも<strong style="color: var(--primary);">800万円</strong>。予算は300万円だったので、結局Excel管理を続けることに...」<br>
-                                    <span style="font-size: 0.95rem; color: var(--text-muted); display: block; margin-top: 10px;">— 都内美容サロン経営者（従業員15名）</span>
-                                </p>
-                            </div>
-                            <div style="line-height: 2; color: var(--text-dark);">
-                                <p style="margin-bottom: 15px;">
-                                    <strong style="color: var(--charcoal);">なぜこんなに高額になるのか？</strong><br>
-                                    大手開発会社は、営業→ディレクター→デザイナー→エンジニアと多重構造。各段階で<strong style="color: var(--primary);">30-40%のマージン</strong>が上乗せされます。
-                                </p>
-                                <div style="background: linear-gradient(135deg, var(--primary) 0%, #E65C00 100%); padding: 25px; border-radius: 12px; margin-top: 20px; box-shadow: 0 8px 25px rgba(255,107,0,0.3);">
-                                    <p style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                                        <span style="font-size: 1.5rem;">✓</span> AI STARTの解決策
-                                    </p>
-                                    <p style="margin-top: 10px; color: white; font-size: 1.05rem; line-height: 1.9; font-weight: 500;">エンジニア直接対応で<strong style="border-bottom: 2px solid white;">中間マージンゼロ</strong>。同じ機能を<strong style="border-bottom: 2px solid white;">40-60%のコスト削減</strong>で実現します。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 課題2: イメージの不一致 -->
-                <div style="background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--primary);">
-                    <div style="display: flex; align-items: start; gap: 30px;">
-                        <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--charcoal); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">02</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem;">「想像と全然違う」納品後の絶望...500万円が水の泡に</h3>
-                            <div style="background: var(--light-gray); padding: 25px; border-radius: 12px; margin-bottom: 1.5rem; border-left: 3px solid var(--primary);">
-                                <p style="font-size: 1.05rem; line-height: 2; color: var(--text-dark); font-style: italic;">
-                                    「契約前は『任せてください』と言われたのに、納品されたシステムは使いにくくて<strong style="color: var(--primary);">誰も使わない</strong>。500万円と半年の時間を無駄にしました」<br>
-                                    <span style="font-size: 0.95rem; color: var(--text-muted); display: block; margin-top: 10px;">— 製造業DX責任者（従業員80名）</span>
-                                </p>
-                            </div>
-                            <div style="line-height: 2; color: var(--text-dark);">
-                                <p style="margin-bottom: 15px;">
-                                    <strong style="color: var(--charcoal);">失敗の原因：</strong><br>
-                                    契約後にしか画面イメージを見せない開発会社が<strong style="color: var(--primary);">70%以上</strong>。完成してから「イメージと違う」では遅すぎます。
-                                </p>
-                                <div style="background: linear-gradient(135deg, var(--primary) 0%, #E65C00 100%); padding: 25px; border-radius: 12px; margin-top: 20px; box-shadow: 0 8px 25px rgba(255,107,0,0.3);">
-                                    <p style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                                        <span style="font-size: 1.5rem;">✓</span> AI STARTの解決策
-                                    </p>
-                                    <p style="margin-top: 10px; color: white; font-size: 1.05rem; line-height: 1.9; font-weight: 500;"><strong style="border-bottom: 2px solid white;">見積り段階で画面イメージ（ワイヤーフレーム）を無料作成</strong>。納得いくまで何度でも修正。契約前に完成形が見えるから安心です。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 課題3: 納期の遅延 -->
-                <div style="background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--primary);">
-                    <div style="display: flex; align-items: start; gap: 30px;">
-                        <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--charcoal); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">03</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem;">「いつ完成するんですか？」3ヶ月待っても音沙汰なし</h3>
-                            <div style="background: var(--light-gray); padding: 25px; border-radius: 12px; margin-bottom: 1.5rem; border-left: 3px solid var(--primary);">
-                                <p style="font-size: 1.05rem; line-height: 2; color: var(--text-dark); font-style: italic;">
-                                    「3ヶ月で完成と言われたのに、半年経っても連絡なし。問い合わせても『確認して折り返します』ばかり。<strong style="color: var(--primary);">繁忙期に間に合わず</strong>、機会損失2000万円...」<br>
-                                    <span style="font-size: 0.95rem; color: var(--text-muted); display: block; margin-top: 10px;">— ECサイト運営企業（年商3億円）</span>
-                                </p>
-                            </div>
-                            <div style="line-height: 2; color: var(--text-dark);">
-                                <p style="margin-bottom: 15px;">
-                                    <strong style="color: var(--charcoal);">なぜ遅れるのか？</strong><br>
-                                    営業→ディレクター→開発者の<strong style="color: var(--primary);">伝言ゲーム</strong>で情報が歪み、手戻りが発生。返信に3日かかることも珍しくありません。
-                                </p>
-                                <div style="background: linear-gradient(135deg, var(--primary) 0%, #E65C00 100%); padding: 25px; border-radius: 12px; margin-top: 20px; box-shadow: 0 8px 25px rgba(255,107,0,0.3);">
-                                    <p style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                                        <span style="font-size: 1.5rem;">✓</span> AI STARTの解決策
-                                    </p>
-                                    <p style="margin-top: 10px; color: white; font-size: 1.05rem; line-height: 1.9; font-weight: 500;">実際に開発するエンジニアと<strong style="border-bottom: 2px solid white;">直接やり取り</strong>。伝言ゲームゼロで、<strong style="border-bottom: 2px solid white;">24時間以内に返信</strong>。週次進捗報告で「今どこまで進んでる？」が常に見える化。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 課題4: 企画の不安 -->
-                <div style="background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--primary);">
-                    <div style="display: flex; align-items: start; gap: 30px;">
-                        <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--charcoal); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">04</div>
+                        <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--charcoal); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; font-weight: 700;">CASE 1</div>
                         <div style="flex: 1;">
                             <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem;">「何を作ればいいか分からない」企画段階で断られた...</h3>
                             <div style="background: var(--light-gray); padding: 25px; border-radius: 12px; margin-bottom: 1.5rem; border-left: 3px solid var(--primary);">
@@ -899,11 +914,76 @@
                                     <strong style="color: var(--charcoal);">開発会社の本音：</strong><br>
                                     「要件が曖昧な案件は面倒」と考える会社が多数。しかし、<strong style="color: var(--primary);">本当に困っている企業ほど、何が必要か分からない</strong>のが現実です。
                                 </p>
-                                <div style="background: linear-gradient(135deg, var(--primary) 0%, #E65C00 100%); padding: 25px; border-radius: 12px; margin-top: 20px; box-shadow: 0 8px 25px rgba(255,107,0,0.3);">
-                                    <p style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                                        <span style="font-size: 1.5rem;">✓</span> AI STARTの解決策
+                                <div style="background: linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%); padding: 45px; border-radius: 20px; margin-top: 30px; box-shadow: 0 15px 50px rgba(255,107,0,0.5); border: 3px solid #FFD700; position: relative; transform: scale(1.02);">
+                                    <div style="position: absolute; top: -15px; left: 30px; background: #FFD700; color: var(--charcoal); padding: 8px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 800; box-shadow: 0 4px 15px rgba(255,215,0,0.4);">
+                                        💡 SOLUTION
+                                    </div>
+                                    <p style="font-size: 1.8rem; font-weight: 900; color: white; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; letter-spacing: 0.03em; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                                        <span style="font-size: 2.2rem; background: white; color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900;">✓</span> AI STARTの解決策
                                     </p>
-                                    <p style="margin-top: 10px; color: white; font-size: 1.05rem; line-height: 1.9; font-weight: 500;"><strong style="border-bottom: 2px solid white;">「何が必要か分からない」段階から大歓迎</strong>。業務フローをヒアリングし、課題を整理。「本当に必要な機能」だけに絞った提案で、<strong style="border-bottom: 2px solid white;">無駄なコストを削減</strong>します。</p>
+                                    <p style="margin-top: 15px; color: white; font-size: 1.35rem; line-height: 2.1; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.15);"><strong style="border-bottom: 4px solid white; padding-bottom: 3px; background: rgba(255,255,255,0.15); padding-left: 8px; padding-right: 8px;">「何が必要か分からない」段階から大歓迎</strong>。業務フローをヒアリングし、課題を整理。「本当に必要な機能」だけに絞った提案で、<strong style="border-bottom: 4px solid white; padding-bottom: 3px; background: rgba(255,255,255,0.15); padding-left: 8px; padding-right: 8px;">無駄なコストを削減</strong>します。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 課題2: 予算オーバー -->
+                <div style="background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--primary);">
+                    <div style="display: flex; align-items: start; gap: 30px;">
+                        <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--charcoal); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; font-weight: 700;">CASE 2</div>
+                        <div style="flex: 1;">
+                            <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem;">他社の見積もりが予算の3倍...「システム化は諦めるしかない」</h3>
+                            <div style="background: var(--light-gray); padding: 25px; border-radius: 12px; margin-bottom: 1.5rem; border-left: 3px solid var(--primary);">
+                                <p style="font-size: 1.05rem; line-height: 2; color: var(--text-dark); font-style: italic;">
+                                    「予約システムの見積もりを3社に依頼したら、最安でも<strong style="color: var(--primary);">800万円</strong>。予算は300万円だったので、結局Excel管理を続けることに...」<br>
+                                    <span style="font-size: 0.95rem; color: var(--text-muted); display: block; margin-top: 10px;">— 都内美容サロン経営者（従業員15名）</span>
+                                </p>
+                            </div>
+                            <div style="line-height: 2; color: var(--text-dark);">
+                                <p style="margin-bottom: 15px;">
+                                    <strong style="color: var(--charcoal);">なぜこんなに高額になるのか？</strong><br>
+                                    大手開発会社は、営業→ディレクター→デザイナー→エンジニアと多重構造。各段階で<strong style="color: var(--primary);">30-40%のマージン</strong>が上乗せされます。
+                                </p>
+                                <div style="background: linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%); padding: 45px; border-radius: 20px; margin-top: 30px; box-shadow: 0 15px 50px rgba(255,107,0,0.5); border: 3px solid #FFD700; position: relative; transform: scale(1.02);">
+                                    <div style="position: absolute; top: -15px; left: 30px; background: #FFD700; color: var(--charcoal); padding: 8px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 800; box-shadow: 0 4px 15px rgba(255,215,0,0.4);">
+                                        💡 SOLUTION
+                                    </div>
+                                    <p style="font-size: 1.8rem; font-weight: 900; color: white; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; letter-spacing: 0.03em; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                                        <span style="font-size: 2.2rem; background: white; color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900;">✓</span> AI STARTの解決策
+                                    </p>
+                                    <p style="margin-top: 15px; color: white; font-size: 1.35rem; line-height: 2.1; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">エンジニア直接対応で<strong style="border-bottom: 4px solid white; padding-bottom: 3px; background: rgba(255,255,255,0.15); padding-left: 8px; padding-right: 8px;">中間マージンゼロ</strong>。同じ機能を<strong style="border-bottom: 4px solid white; padding-bottom: 3px; background: rgba(255,255,255,0.15); padding-left: 8px; padding-right: 8px;">30-40%のコスト削減</strong>で実現します。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 課題3: コミュニケーション不足 -->
+                <div style="background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--primary);">
+                    <div style="display: flex; align-items: start; gap: 30px;">
+                        <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--charcoal); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; font-weight: 700;">CASE 3</div>
+                        <div style="flex: 1;">
+                            <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem;">「想像と全然違う」「いつ完成するの？」連絡不足で生まれる不安と失敗</h3>
+                            <div style="background: var(--light-gray); padding: 25px; border-radius: 12px; margin-bottom: 1.5rem; border-left: 3px solid var(--primary);">
+                                <p style="font-size: 1.05rem; line-height: 2; color: var(--text-dark); font-style: italic;">
+                                    「こちらから進捗確認の連絡をするまで音沙汰なし。やっと納品されたら<strong style="color: var(--primary);">想像と全然違う</strong>システムが...。問い合わせても『確認して折り返します』ばかりで、結局500万円と半年が無駄になりました」<br>
+                                    <span style="font-size: 0.95rem; color: var(--text-muted); display: block; margin-top: 10px;">— 製造業DX責任者（従業員80名）</span>
+                                </p>
+                            </div>
+                            <div style="line-height: 2; color: var(--text-dark);">
+                                <p style="margin-bottom: 15px;">
+                                    <strong style="color: var(--charcoal);">失敗の原因：</strong><br>
+                                    営業→ディレクター→開発者の<strong style="color: var(--primary);">伝言ゲーム</strong>で情報が歪み、開発途中の共有もない。納品されるまで進捗が見えず、完成してから「イメージと違う」では手遅れです。
+                                </p>
+                                <div style="background: linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%); padding: 45px; border-radius: 20px; margin-top: 30px; box-shadow: 0 15px 50px rgba(255,107,0,0.5); border: 3px solid #FFD700; position: relative; transform: scale(1.02);">
+                                    <div style="position: absolute; top: -15px; left: 30px; background: #FFD700; color: var(--charcoal); padding: 8px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 800; box-shadow: 0 4px 15px rgba(255,215,0,0.4);">
+                                        💡 SOLUTION
+                                    </div>
+                                    <p style="font-size: 1.8rem; font-weight: 900; color: white; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; letter-spacing: 0.03em; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                                        <span style="font-size: 2.2rem; background: white; color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900;">✓</span> AI STARTの解決策
+                                    </p>
+                                    <p style="margin-top: 15px; color: white; font-size: 1.35rem; line-height: 2.1; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.15);"><strong style="border-bottom: 4px solid white; padding-bottom: 3px; background: rgba(255,255,255,0.15); padding-left: 8px; padding-right: 8px;">定期的な進捗共有で途中経過を確認</strong>。週次報告＋画面の実装状況を随時共有するので、納品時に絶望的なズレがありません。エンジニアと<strong style="border-bottom: 4px solid white; padding-bottom: 3px; background: rgba(255,255,255,0.15); padding-left: 8px; padding-right: 8px;">直接やり取り・24時間以内に返信</strong>で安心。</p>
                                 </div>
                             </div>
                         </div>
@@ -912,26 +992,21 @@
             </div>
 
             <!-- 結論部分 -->
-            <div style="margin-top: 6rem; background: linear-gradient(135deg, var(--primary) 0%, #E65C00 100%); padding: 60px; border-radius: 20px; text-align: center; box-shadow: 0 12px 40px rgba(255,107,0,0.3); position: relative; overflow: hidden;">
+            <div style="margin-top: 6rem; background: linear-gradient(135deg, var(--primary) 0%, #E65C00 100%); padding: 80px 60px; border-radius: 20px; text-align: center; box-shadow: 0 20px 60px rgba(255,107,0,0.5); position: relative; overflow: hidden; border: 5px solid #FFD700;">
                 <!-- Background Image -->
                 <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.15;">
                     <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=600&fit=crop&q=90&auto=format" alt="チームワーク" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
 
+                <!-- Decorative Elements -->
+                <div style="position: absolute; top: 30px; left: 30px; width: 80px; height: 80px; background: rgba(255,215,0,0.3); border-radius: 50%; z-index: 1;"></div>
+                <div style="position: absolute; bottom: 40px; right: 40px; width: 120px; height: 120px; background: rgba(255,215,0,0.2); border-radius: 50%; z-index: 1;"></div>
+
                 <div style="position: relative; z-index: 2;">
-                    <p style="font-size: 2.2rem; font-weight: 800; color: white; line-height: 1.6; margin-bottom: 2rem;">
+                    <!-- Main Heading -->
+                    <p style="font-size: 4rem; font-weight: 900; color: white; line-height: 1.4; text-shadow: 0 4px 20px rgba(0,0,0,0.3); letter-spacing: 0.02em;">
                         これらの課題、<br>
-                        すべて解決できます
-                    </p>
-                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.95); line-height: 2; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                        AI STARTは<strong>エンジニア直接対応</strong>で、中間マージンなし・伝言ゲームなし・スピード対応。<br>
-                        「何が必要か分からない」段階から、<strong>成果が出るまで</strong>全力でサポートします
-                    </p>
-                    <a href="#contact" style="display: inline-block; padding: 25px 80px; background: white; color: var(--primary); text-decoration: none; border-radius: 50px; font-size: 1.3rem; font-weight: 800; box-shadow: 0 8px 30px rgba(0,0,0,0.2); transition: all 0.3s ease;">
-                        今すぐ無料相談する
-                    </a>
-                    <p style="margin-top: 2rem; font-size: 0.95rem; color: rgba(255,255,255,0.9);">
-                        ※しつこい営業は一切ありません　※相談だけでもOKです
+                        <span style="font-size: 4.5rem; background: linear-gradient(to right, #FFD700, #FFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block;">すべて解決できます</span>
                     </p>
                 </div>
             </div>
@@ -951,52 +1026,52 @@
             <div class="strengths-grid">
                 <div class="strength-card" style="background: white; border: 1px solid var(--medium-gray); border-radius: 12px; padding: 40px 30px;">
                     <div style="width: 100%; height: 200px; margin-bottom: 1.5rem; border-radius: 8px; overflow: hidden; position: relative;">
-                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=400&fit=crop&q=90&auto=format" alt="ワイヤーフレーム作成" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=400&fit=crop&q=90&auto=format" alt="受託開発の介在余地を見つける" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                     </div>
-                    <span class="strength-badge" style="background: var(--primary); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;"> 初心者超歓迎</span>
+                    <span class="strength-badge" style="background: var(--primary); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;"> 緻密なヒアリング</span>
                     <div class="strength-number" style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">01</div>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; line-height: 1.5; margin-bottom: 1rem; color: var(--charcoal);"> 見積り前にワイヤーフレームを作成！<br>「こんな感じです」を見せます</h3>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; line-height: 1.5; margin-bottom: 1rem; color: var(--charcoal);"> 受託開発の介在余地を見つける<br>本当に必要なシステムを提案</h3>
                     <p style="font-size: 1.05rem; line-height: 1.9;">
-                        多くの開発会社では、契約後にしか具体的な画面イメージを見せてもらえません。そのため「思っていたのと違う...」というケースが頻発しています。<br><br>
+                        クライアントに納品したいものを押し付けるのではなく、緻密なヒアリングの元、本当に必要なシステムを提案・納品します。<br><br>
 
-                        弊社では見積り段階からワイヤーフレームを作成し、完成イメージを実際に確認していただきます。納得いただけるまで何度でも修正を重ね、安心してご契約いただける状態を目指します。<br><br>
+                        業務フローを徹底的にヒアリングし、課題の本質を見極めます。不要な機能は削ぎ落とし、本当に効果のある機能だけに絞り込むことで、コストを抑えながら最大の効果を実現します。<br><br>
 
                         <strong style="font-size: 1.15rem; color: #E65C00;">
-                            「イメージと違った」という事態を防ぐことが、私たちの第一優先です。
+                            押し付けではなく、貴社に最適な解決策を一緒に見つけます。
                         </strong>
                     </p>
                 </div>
                 <div class="strength-card" style="background: white; border: 1px solid var(--medium-gray); border-radius: 12px; padding: 40px 30px;">
                     <div style="width: 100%; height: 200px; margin-bottom: 1.5rem; border-radius: 8px; overflow: hidden; position: relative;">
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=400&fit=crop&q=90&auto=format" alt="直接コミュニケーション" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=400&fit=crop&q=90&auto=format" alt="コミュニケーション" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                     </div>
                     <span class="strength-badge" style="background: var(--primary); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;"> 超スピード対応</span>
                     <div class="strength-number" style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">02</div>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; line-height: 1.5; margin-bottom: 1rem; color: var(--charcoal);"> 開発者と直接やり取り！<br>伝言ゲームなし</h3>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; line-height: 1.5; margin-bottom: 1rem; color: var(--charcoal);"> ニュアンスのズレなし！<br>迅速なレスポンスで安心</h3>
                     <p style="font-size: 1.05rem; line-height: 1.9;">
                         営業担当→ディレクター→開発者と何段階も経由すると、「返信が遅い」「伝えた内容と違う」「予期せぬ追加料金が発生」といった問題が起きがちです。<br><br>
 
                         弊社では実際に開発を担当するエンジニアと直接やり取りしていただけます。24時間以内の返信を心がけており、細かい調整もその場で判断できるため、スムーズな開発が可能です。<br><br>
 
                         <strong style="font-size: 1.15rem; color: #E65C00;">
-                            伝言ゲームによるロスをなくし、スピーディーに進めます。
+                            ニュアンスのズレを防ぎ、迅速なレスポンスで進めます。
                         </strong>
                     </p>
                 </div>
                 <div class="strength-card" style="background: white; border: 1px solid var(--medium-gray); border-radius: 12px; padding: 40px 30px;">
                     <div style="width: 100%; height: 200px; margin-bottom: 1.5rem; border-radius: 8px; overflow: hidden; position: relative;">
-                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=400&fit=crop&q=90&auto=format" alt="サポート体制" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=400&fit=crop&q=90&auto=format" alt="アフターサポート" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                     </div>
-                    <span class="strength-badge" style="background: var(--primary); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;"> 最後まで伴走</span>
+                    <span class="strength-badge" style="background: var(--primary); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;"> アフターサポート万全</span>
                     <div class="strength-number" style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">03</div>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; line-height: 1.5; margin-bottom: 1rem; color: var(--charcoal);"> 作って終わりじゃない！<br>成果が出るまで全力サポート</h3>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; line-height: 1.5; margin-bottom: 1rem; color: var(--charcoal);"> 納品後も安心サポート！<br>困ったときすぐに相談できる</h3>
                     <p style="font-size: 1.05rem; line-height: 1.9;">
-                        多くの開発会社では「納品したら終わり」というケースがほとんどです。実際に使ってみて操作方法が分からない、期待した成果が出ないといった課題があっても、サポートされずに放置されることも少なくありません。<br><br>
+                        「納品後に不具合が出たけど、サポート料金が高額」「問い合わせても返信が遅い」「担当者が変わって引き継ぎされていない」といった不安はありません。<br><br>
 
-                        弊社では運用開始後も定期的なサポートを行い、改善提案を積極的に行います。売上向上や業務効率化といった数値目標を一緒に追いかけ、実際に成果が出るまで伴走します。<br><br>
+                        納品後も気軽に相談できる体制を整えています。小さな疑問から急なトラブルまで、迅速に対応。開発を担当したエンジニアが直接サポートするので、スムーズに解決できます。<br><br>
 
                         <strong style="font-size: 1.15rem; color: #E65C00;">
-                            お客様の成功が、私たちの成功だと考えています。
+                            「納品したら終わり」ではなく、長期的にサポートします。
                         </strong>
                     </p>
                 </div>
@@ -1146,17 +1221,23 @@
 
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto;">
                 <div style="background: white; padding: 40px 30px; border-radius: 8px; border: 1px solid var(--medium-gray); transition: all 0.3s ease; text-align: center;">
-                    <div style="width: 64px; height: 64px; margin: 0 auto 20px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; font-weight: 700;">W</div>
+                    <div style="width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 12px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=200&h=200&fit=crop&q=90&auto=format" alt="Webシステム開発" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                    </div>
                     <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: var(--charcoal);">Webシステム開発</h3>
                     <p style="color: var(--text-light); line-height: 1.8; font-size: 0.95rem;">予約システム、マッチングプラットフォーム、ECサイトなど、業務を自動化するWebシステム</p>
                 </div>
                 <div style="background: white; padding: 40px 30px; border-radius: 8px; border: 1px solid var(--medium-gray); transition: all 0.3s ease; text-align: center;">
-                    <div style="width: 64px; height: 64px; margin: 0 auto 20px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; font-weight: 700;">B</div>
+                    <div style="width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 12px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=200&h=200&fit=crop&q=90&auto=format" alt="業務システム開発" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                    </div>
                     <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: var(--charcoal);">業務システム開発</h3>
                     <p style="color: var(--text-light); line-height: 1.8; font-size: 0.95rem;">CRM、在庫管理、勤怠管理など、社内業務を効率化するシステム</p>
                 </div>
                 <div style="background: white; padding: 40px 30px; border-radius: 8px; border: 1px solid var(--medium-gray); transition: all 0.3s ease; text-align: center;">
-                    <div style="width: 64px; height: 64px; margin: 0 auto 20px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; font-weight: 700;">M</div>
+                    <div style="width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 12px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop&q=90&auto=format" alt="モバイルアプリ開発" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                    </div>
                     <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: var(--charcoal);">モバイルアプリ開発</h3>
                     <p style="color: var(--text-light); line-height: 1.8; font-size: 0.95rem;">iOS/Android/LINEアプリなど、スマホで使えるアプリケーション</p>
                 </div>
